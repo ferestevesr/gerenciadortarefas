@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block titulo%}
+            index
+            {%endblock%}
+    </title>
+</head>
+<body>
+    {%block body%}
+
+        <h1>Bem vindo  </h1>
+
+        <h3>Cadastar </h3>
+
+    <form method="POST">
+        {%block formulario %}
+        {{form.csrf_token }}
+
+        {{form.email.label}}
+        {{form.email() }}
+
+        {{form.password.label}}
+        {{form.password() }}
+        {{form.botao_confirmacao() }}
+        {%endblock%}
+    </form>
+        <a href="{{url_for('tarefas', usuario = 'fernando' )}}">entrar</a>
+        <br>
+        <a href="{{url_for('criarconta')}}">criarconta</a>
+    {%endblock%}
+
+
+</body>
+</html>
