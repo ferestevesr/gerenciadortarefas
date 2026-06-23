@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
-
+from flask_wtf.file import FileField, FileAllowed
 from gerenciadortarefas.models import Usuario
 
 class FormLogin(FlaskForm):
@@ -22,3 +22,12 @@ class FormCriarConta(FlaskForm):
         usuario = Usuario.query.filter_by(email=email.data).first()
         if usuario:
             raise ValidationError("Email já cadastrado, faça login novamente.")
+
+
+class FormFoto(FlaskForm):
+    foto = FileField(
+        "Foto",
+        validators=[FileAllowed(['jpg', 'png', 'jpeg'])]
+    )
+
+    botao_confirmacao = SubmitField("Enviar")

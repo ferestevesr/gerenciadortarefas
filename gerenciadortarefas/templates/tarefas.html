@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block titulo %}
+    tarefas - {{ usuario.username }}
+{% endblock %}
+
+{% block body %}
+    <h1>Esse é meu perfil {{ usuario.username }}</h1>
+    <br>
+
+    <a href="{{ url_for('logout') }}">Sair</a>
+
+    {% if form %}
+        <form method="POST" enctype="multipart/form-data">
+
+            {{ form.csrf_token }}
+
+            {{ form.foto() }}
+
+            {{ form.botao_confirmacao() }}
+
+        </form>
+    {% endif %}
+{% endblock %}

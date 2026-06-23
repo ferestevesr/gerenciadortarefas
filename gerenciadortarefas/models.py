@@ -7,9 +7,8 @@ class Usuario(database.Model, UserMixin):
     password = database.Column(database.String(250), nullable=False)
     username = database.Column(database.String(250), nullable=False)
     email = database.Column(database.String(250), nullable=False, unique=True)
-
     cargo = database.Column(database.String(50), nullable=False, default="funcionário")
-
+    foto_perfil = database.Column(database.String(250), nullable=False, default='default.png')
 
     @login_manager.user_loader
     def load_usuario(id_usuario):
@@ -21,11 +20,7 @@ class Tarefa(database.Model):
     descricao = database.Column(database.String(250), nullable=False)
     status = database.Column(database.String(250), default='Pendente')
     data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow)
-
-    usuario_id = (database.Column
-                (database.Integer,
-                database.ForeignKey('usuario.id'),
-                nullable=False))
+    usuario_id = (database.Column(database.Integer,database.ForeignKey('usuario.id'),nullable=False))
 
 class Projeto(database.Model):
     id_projeto = database.Column(database.Integer, primary_key=True)
@@ -37,3 +32,4 @@ class Projeto(database.Model):
         database.ForeignKey('usuario.id'),
         nullable=False
     )
+
